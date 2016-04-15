@@ -8,6 +8,7 @@ class Item(models.Model):
 	description = models.TextField()
 	price = models.DecimalField(max_digits = 4, decimal_places = 2)
 	manufacturer = models.CharField(max_length = 100)
+	image = models.FileField(null=True, blank=True)
 
 	class Meta:
 		abstract = True
