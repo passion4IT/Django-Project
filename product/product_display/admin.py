@@ -2,17 +2,18 @@ from django.contrib import admin
 
 from .models import Camera, Phone
 
-class CameraAdmin(admin.ModelAdmin):
+class ModelAdmin(admin.ModelAdmin):
 	list_display = ["name", "productId", "manufacturer"]
 	list_filter = ["name", "productId", "price"]
 	search_fields = ["name", "description","manufacturer", "productId"]
+	
+
+class CameraAdmin(ModelAdmin):
 	class meta:
 		model = Camera
 
-class PhoneAdmin(admin.ModelAdmin):
-	list_display = ["name", "productId", "manufacturer"]
-	list_filter = ["name", "productId", "price"]
-	search_fields = ["name", "description","manufacturer", "productId"]
+
+class PhoneAdmin(ModelAdmin):
 	class meta:
 		model = Phone
 
