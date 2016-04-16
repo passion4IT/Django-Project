@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Product :  {% endblock %}
+
+{% block content %}
+
+
+You are on : Product / 
+
+<hr />
+
+<h1>{{object.name}}</h1>
+
+<ul>
+{% for pro in Product %}
+
+	<li>{{pro.name}}</li>
+
+{% endfor %}
+
+</ul>

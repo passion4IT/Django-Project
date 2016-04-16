@@ -1,8 +1,8 @@
-{% load static %}
+{% load staticfiles %}
 <!doctype html>
 <html>
 	<head>
-	<title>Product Display</title>
+	<title{% block title %}>Product Display {% endblock %}</title>
 	<meta charset="utf-8">
 	
 		<!-- Latest compiled and minified CSS -->
@@ -78,7 +78,7 @@
 
 
 					</div>
-					<p> Price : {{camera.price}}</p>
+					<p> Price : {{camera.price}} <a href="/camera/{{camera.id}}">Show more </a></p>
 
 					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 				</div>

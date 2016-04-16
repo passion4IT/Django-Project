@@ -1,0 +1,191 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+	<head>
+	<title{% block title %}>Product Display {% endblock %}</title>
+	<meta charset="utf-8">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- link to external css for the styling -->
+	<link rel='stlesheet' href="{% static 'css/base.css' %}"/>
+
+	<!-- link to google fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Prociono' rel='stylesheet' type='text/css'>
+
+	</head>
+{% block css %}
+	<style>
+		body{background-color: #E0F8E6;}
+
+		body
+		{
+	
+			font-family: 'Prociono', serif;
+			background-color: #ECF6CE;
+
+			
+		}
+
+		.container {
+			border-top: 2px groove #610B4B;
+			background-color: #ffffff;
+		}
+
+		h1
+		{
+			color:#d04949;
+			text-align: center;
+			text-shadow: 2px 2px #e6e600;
+			font-size: 5em;
+			font-family: "Bree Serif", sans-serif;
+
+		}
+
+		p {
+			color: #ac3939;
+			font-size: 2em;
+			font-weight: bold;
+			text-decoration: underline;
+			
+		}
+
+		form{text-align: center;}
+		li, h3
+		{
+			font-size: 1.5em;
+			list-style-type: none;
+		}
+			
+		h2
+		{
+			text-align: center;
+			margin-bottom: 10px;
+		}
+			
+		}
+		.panel-footer, input, label {
+			padding: 10px;
+			margin: 10px;
+			font-family: 'Prociono', serif;
+			border-radius: 10px;
+		}
+
+		input{
+			text-align: center;
+			margin: 5px;
+			border: 2px solid #088A08;
+			border-radius: 15px !important;
+		}
+
+		.btn
+		{
+			padding: 2px 25px !important;
+			margin: 10px !important;
+			border-radius: 17px !important;
+			font-size: 20px!important;
+		}
+
+		.thumbnail
+		{
+			background-color: #FFFFCC;
+		}
+
+
+	</style>
+
+
+
+{% endblock %}
+
+
+<body>
+
+	<div class="container">
+
+	{% block content %}
+
+		<h1> Electronics Store </h1> <hr />
+
+		 <p> Browse by Category </p>
+		
+		 
+		 	{% for cat in category %}
+		 	<li><a href="{% url 'category_details' pk=cat.pk %}"onmouseover="this.innerHTML='Click to view the catalog of {{cat.name}}'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}</a></li> 
+		 	{{cat.id}}
+		 	{% endfor %}
+	
+
+		<!-- Search form for finding individual product based on productname and productid-->
+
+		<form method="GET" action="" name="searchForm">
+
+		<h3> Search Product:</h3>
+		<form class="form-horizontal">
+
+		  <div class="panel panel-default">
+		  <label for="prName"> Product Name:
+		  <input type="text" placeholder="Product Name" />
+		  
+		  <label for="prid"> Product Id:
+		  <input type="text" placeholder="Product Id" />
+
+		  <button type="submit" class="btn btn-success"> Search </button>	  
+
+		  </div>
+
+		</form>
+
+		<!--End of search form -->
+
+		<!-- Complete list of products display -->
+
+		<h2>Products:</h2> <hr />
+
+			<div class="row">
+			{% for item in product %}
+			<div class="col-md-6">
+
+				<div class="thumbnail">
+					<h3>{{item.name}} <small> Id: {{item.id}}</small></h3>
+					<div class="row">
+						<div class="col-md-3">
+							<img src= '{{item.image.url}}' class="img-responsive" >
+						</div>
+
+						<div class="col-md-6">
+
+							{{item.description}}
+
+						</div>
+
+
+					</div>
+					<p> Price : {{item.price}} </p>
+
+					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
+				</div>
+			</div>
+
+			
+
+			{% cycle "" "</div><div class='row'>" %}
+			{% endfor %}
+		   </div>
+
+		
+
+
+	{% endblock %}
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <!-- Latest compiled and minified JavaScript -->
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+</html>
