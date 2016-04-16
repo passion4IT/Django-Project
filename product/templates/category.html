@@ -1,21 +1,52 @@
-{% extends "base.html" %}
 
-{% block title %} Product :  {% endblock %}
+{% extends "hello.html" %}
+
+{% block title %} {{cat_name}} {% endblock %}
 
 {% block content %}
 
+{% block style %}
+<style>
+p
+{
+	font-size : 1em;
+	padding: 5px;
+	margin: 15px;
+}
 
-You are on : Product / 
+h1{ margin-bottom:35px !important;
+	font-size: 40px;
+	text-decoration : underline; }
 
+</style>
+
+{% endblock %}
+
+<p>You are on : Product / {{cat_name}}</p>
+
+<p><a href="javascript:history.go(-1)"> Back to Previous Page </a></p>
 <hr />
 
-<h1>{{object.name}}</h1>
+<h1>{{cat_name}}</h1>
 
-<ul>
-{% for pro in Product %}
+<div class="row">
+{% for pro in cat_context %}
+	
+	
+		<div class="col-md-3">
 
-	<li>{{pro.name}}</li>
+			<div class="panel panel-default">
+
+				<div class="panel-title text-center">{{pro.name}}</div>
+				<img src= "{{pro.image.url}}" class="img-responsive center-block">
+				<p>{{pro.description}}</p>
+
+			</div>
+		</div>
+	
 
 {% endfor %}
+</div>
 
-</ul>
+
+{% endblock %}

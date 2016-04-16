@@ -17,11 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from product_display.views import product_display
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', "product_display.views.product_display"),
+    url(r'^$', product_display),
     url(r'product/', include("product_display.urls")),
     # url(r'^product/',include("product_display.urls")),
 ]

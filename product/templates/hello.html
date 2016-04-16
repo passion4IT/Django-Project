@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 	<head>
-	<title{% block title %}>Product Display {% endblock %}</title>
+	<title>{% block title %}Product Display {% endblock %}</title>
 	<meta charset="utf-8">
 
 	<!-- Latest compiled and minified CSS -->
@@ -112,28 +112,28 @@
 
 		<h1> Electronics Store </h1> <hr />
 
+		<ul>
 		 <p> Browse by Category </p>
-		
+			
 		 
 		 	{% for cat in category %}
-		 	<li><a href="{% url 'category_details' pk=cat.pk %}"onmouseover="this.innerHTML='Click to view the catalog of {{cat.name}}'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}</a></li> 
+		 	<li><a href="product/{{cat.name}}" onmouseover="this.innerHTML='Click to view the catalog of {{cat.name}}'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}</a></li> 
 		 	{{cat.id}}
 		 	{% endfor %}
-	
-
+		</ul>
 		<!-- Search form for finding individual product based on productname and productid-->
 
-		<form method="GET" action="" name="searchForm">
+		<form method="GET" action="" >
 
 		<h3> Search Product:</h3>
 		<form class="form-horizontal">
 
 		  <div class="panel panel-default">
 		  <label for="prName"> Product Name:
-		  <input type="text" placeholder="Product Name" />
+		  <input type="text" name ='search'placeholder="Product Name" value="{{request.GET.search}}" />
 		  
 		  <label for="prid"> Product Id:
-		  <input type="text" placeholder="Product Id" />
+		  <input type="text" placeholder="Product Id"value="" name="searchId" value={{request.GET.searchId}} />
 
 		  <button type="submit" class="btn btn-success"> Search </button>	  
 
@@ -151,11 +151,11 @@
 			{% for item in product %}
 			<div class="col-md-6">
 
-				<div class="thumbnail">
-					<h3>{{item.name}} <small> Id: {{item.id}}</small></h3>
+				<div class="panel panel-default">
+					<div class="panel-title text-center">{{item.name}} <small> Id: {{item.id}}</small></div>
 					<div class="row">
 						<div class="col-md-3">
-							<img src= '{{item.image.url}}' class="img-responsive" >
+							<img src= '{{item.image.url}}' class="img-responsive center-block" >
 						</div>
 
 						<div class="col-md-6">
@@ -167,6 +167,7 @@
 
 					</div>
 					<p> Price : {{item.price}} </p>
+					<p> ProductId: {{item.productId}}</p>
 
 					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 				</div>
