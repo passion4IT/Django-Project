@@ -1,17 +1,21 @@
+{% load static %}
 <!doctype html>
 <html>
 	<head>
 	<title>Product Display</title>
-
+	<meta charset="utf-8">
 	
-	<!-- Latest compiled and minified CSS -->
+		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- link to external css for the styling -->
+		<link rel='stlesheet' href="{% static 'css/base.css' %}"/>
+
+		<!-- link to google font BreeSerif -->
+		<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
 	</head>
 
@@ -24,14 +28,108 @@
 		{% block content %}
 			<h1> Electronics Store </h1> <hr />
 
+			<p> Browse By </p> <hr />
 
+			<ul class="list-group">	
+				<li><a href="#">{{category}}</a></li>
+				<li><a href="#">{{category2}}</a></li>
+
+			</ul>
+
+
+		<!-- Search form for finding individual product based on productname and productid-->
+
+		<form method="GET" action="" name="searchForm">
+
+		<div class="panel panel-default">
+		<div class="panel-body">
+		<div class="panel-footer">
+			<input type="text" name="productname" placeholder="Enter productname">
+
+			<input type="text" name="productid" placeholder = "Enter productId"><br />
+
+		<input type="submit" class="btn btn-success btn-small" value="search"></div>
+		</div>
+			</form>
+		</div>
+
+
+		</form>
+
+		<!-- Displaying available camera -->
+			<h2>{{category}}</h2>
+
+			<div class="row">
+			{% for camera in item %}
+			<div class="col-md-6">
+
+				<div class="thumbnail">
+					<h3>{{camera.name}} <small> Id: {{camera.id}}</small></h3>
+					<div class="row">
+						<div class="col-md-6">
+							<img src= '{{camera.image.url}}' class="img-responsive" >
+						</div>
+
+						<div class="col-md-6">
+
+							{{camera.description}}
+
+						</div>
+
+
+					</div>
+					<p> Price : {{camera.price}}</p>
+
+					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
+				</div>
+			</div>
+
+			{% endfor %}
+
+		   </div>
+
+		<!-- Displaying SmartPhones -->
+
+			<h2>{{category2}}</h2>
+
+			<div class="row">
+			{% for phone in item2 %}
+			<div class="col-md-6">
+
+				<div class="thumbnail">
+					<h3>{{phone.name}} <small> Id: {{phone.id}} </small></h3>
+					<div class="row">
+					<div class="col-md-6">
+					<img src= '{{phone.image.url}}' class="img-responsive" >
+					</div>
+
+					<div class="col-md-6">
+
+						{{phone.description}}
+
+					</div>
+
+
+					</div>
+					<p> Price : {{phone.price}}</p>
+
+					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
+				</div>
+			</div>
+
+			{% cycle "" "</div><div class='row'>" %}
+			{% endfor %}
+
+			</div>
 
 
 
 
 		{%endblock content %}
 	</div>
-
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <!-- Latest compiled and minified JavaScript -->
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 
 

@@ -4,9 +4,9 @@ from django.db import models
 
 class Item(models.Model):
 	name = models.CharField(max_length =120)
-	productId = models.IntegerField()
+	productId = models.CharField(max_length=110)
 	description = models.TextField()
-	price = models.DecimalField(max_digits = 4, decimal_places = 2)
+	price = models.DecimalField(max_digits = 10, decimal_places = 5)
 	manufacturer = models.CharField(max_length = 100)
 	image = models.FileField(null=True, blank=True)
 
