@@ -1,12 +1,13 @@
 
 {% extends "hello.html" %}
 
-{% block title %} {{cat_name}} {% endblock %}
+{% block title %} Verkokauppa / {{cat_name}} {% endblock %}
 
 {% block content %}
 
 {% block style %}
 <style>
+
 p
 {
 	font-size : 1em;
@@ -14,17 +15,45 @@ p
 	margin: 15px;
 }
 
+li{
+	font-size: 13px;
+	color: #2D8095;
+}
+
+.btn 
+{
+	font-size:20px !important;
+	padding:10px !important;
+	border-radius: 5px;
+	width:100%;
+}
+
 h1{ margin-bottom:35px !important;
 	font-size: 40px;
 	text-decoration : underline; }
+.panel-title
+{
+	background-color: #008000;
+	font-family: 'Prociono', serif !important;
+	color:#ffffff;
+	padding: 10px;
+	margin-bottom: 10px;
 
+}
+
+#desc 
+{
+	color: #262D2E;
+	padding: 10px;
+	border-radius: 3px;
+}
 </style>
 
 {% endblock %}
 
-<p>You are on : Product / {{cat_name}}</p>
+<p>Olet : Tuote / {{cat_name}}</p>
 
-<p><a href="javascript:history.go(-1)"> Back to Previous Page </a></p>
+<p><a href="javascript:history.go(-1)"> Edelliselle sivulle </a></p>
 <hr />
 
 <h1>{{cat_name}}</h1>
@@ -33,18 +62,40 @@ h1{ margin-bottom:35px !important;
 {% for pro in cat_context %}
 	
 	
-		<div class="col-md-3">
+		<div class="col-md-6">
 
 			<div class="panel panel-default">
 
 				<div class="panel-title text-center">{{pro.name}}</div>
-				<img src= "{{pro.image.url}}" class="img-responsive center-block">
-				<p>{{pro.description}}</p>
+					<div class="row">
+						<div class="col-md-6 pull-left">
+							<img src= "{{pro.image.url}}" class="img-responsive center-block">
+						</div>
+
+						<div class="col-md-6 pull-right">
+
+							<div class="panel panel-default">
+								<ul>
+									<li> Tuote: <strong>{{pro.productId}}</strong></li>
+									<li> Valmistaja : <strong>{{pro.manufacturer}}</strong></li>
+									<li> Hinta: <span style="color:red"><strong> &euro;{{pro.price}}</strong></span></li>
+								</ul>
+
+								<hr />
+								<li id="desc">{{pro.description}}</li>
+
+								<li><a href="" class="btn btn-primary">Lisää ostoskoriin</a></li>
+
+							</div>
+						
+						</div>
+					</div>
 
 			</div>
+
 		</div>
 	
-
+{% cycle "" "</div><div class='row'>" %}
 {% endfor %}
 </div>
 

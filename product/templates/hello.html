@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 	<head>
-	<title>{% block title %}Product Display {% endblock %}</title>
+	<title>{% block title %}Verkokauppa {% endblock %}</title>
 	<meta charset="utf-8">
 
 	<!-- Latest compiled and minified CSS -->
@@ -60,6 +60,9 @@
 		{
 			font-size: 1.5em;
 			list-style-type: none;
+			font-family: 'Open Sans', sans-serif;
+			margin: 10px;
+			font-weight: bold;
 		}
 			
 		h2
@@ -95,6 +98,28 @@
 		{
 			background-color: #FFFFCC;
 		}
+		#category
+		{
+			
+			color:#ffffff;
+			font-family:'Open Sans', sans-serif;
+			font-size: 18px;
+			padding: 5px -2px 6px 6px !important;
+			border-radius: 2px;
+			margin-right:40px;
+			
+		}
+		#panel-container
+		{
+			height: auto;
+			background-color: #008000;
+			width: 200px;
+			padding:0px;
+
+		}
+		.glyphicon {
+			font-size: 15px;
+		}
 
 
 	</style>
@@ -110,34 +135,37 @@
 
 	{% block content %}
 
-		<h1> Electronics Store </h1> <hr />
+		<h1> VerkoKauppa </h1> <hr />
 
+		<div class="panel panel-default" id="panel-container">
 		<ul>
-		 <p> Browse by Category </p>
+		 <div class="panel-header" id="category" style="text-decoration: underline;"> Tuoteryhmät </div> 
 			
-		 
+		<!-- List of products category to browse ease -->
 		 	{% for cat in category %}
-		 	<li><a href="product/{{cat.name}}" onmouseover="this.innerHTML='Click to view the catalog of {{cat.name}}'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}</a></li> 
-		 	{{cat.id}}
+		 	<li>		
+		 		<a style= "color:#E3F0F1;" href="product/{{cat.name}}" onmouseover="this.innerHTML='Näytä kaikki'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}
+		 		</a>
+		 	</li> 
+		 	
 		 	{% endfor %}
 		</ul>
+		</div>
 		<!-- Search form for finding individual product based on productname and productid-->
 
-		<form method="GET" action="" >
+		<form class="form-horizontal" method="GET" action="" >
 
-		<h3> Search Product:</h3>
-		<form class="form-horizontal">
-
-		  <div class="panel panel-default">
-		  <label for="prName"> Product Name:
-		  <input type="text" name ='search'placeholder="Product Name" value="{{request.GET.search}}" />
+		<h3> Tuotehaku:</h3>
+	  	<div class="panel panel-default">
+		  <label for="prName"> tuotenimella:
+		  <input type="text" name ='search'placeholder="tuotenimella" value="{{request.GET.search}}" />
 		  
-		  <label for="prid"> Product Id:
-		  <input type="text" placeholder="Product Id"value="" name="searchId" value={{request.GET.searchId}} />
+		  <label for="prid"> Tuotekodilla:
+		  <input type="text" placeholder="Tuotekodilla"value="" name="searchId" value={{request.GET.searchId}} />
 
-		  <button type="submit" class="btn btn-success"> Search </button>	  
+		  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Hae </button>	  
 
-		  </div>
+		</div>
 
 		</form>
 
@@ -145,33 +173,33 @@
 
 		<!-- Complete list of products display -->
 
-		<h2>Products:</h2> <hr />
+		<h2>Tuotteet:</h2> <hr />
 
 			<div class="row">
 			{% for item in product %}
-			<div class="col-md-6">
+				<div class="col-md-6">
 
-				<div class="panel panel-default">
-					<div class="panel-title text-center">{{item.name}} <small> Id: {{item.id}}</small></div>
-					<div class="row">
-						<div class="col-md-3">
-							<img src= '{{item.image.url}}' class="img-responsive center-block" >
+					<div class="panel panel-default">
+						<div class="panel-title text-center">{{item.name}} <small> Id: {{item.id}}</small></div>
+						<div class="row">
+							<div class="col-md-6">
+								<img src= '{{item.image.url}}' class="img-responsive center-block" >
+							</div>
+
+							<div class="col-md-6">
+
+								{{item.description}}
+
+							</div>
+
+
 						</div>
+						<li> Price : {{item.price}} </li>
+						<p> ProductId: {{item.productId}}</p>
 
-						<div class="col-md-6">
-
-							{{item.description}}
-
-						</div>
-
-
+						<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 					</div>
-					<p> Price : {{item.price}} </p>
-					<p> ProductId: {{item.productId}}</p>
-
-					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 				</div>
-			</div>
 
 			
 
