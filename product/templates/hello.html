@@ -121,7 +121,29 @@
 			font-size: 15px;
 		}
 
+		.panel-title{
+			background-color: #008000;
+			padding: 10px;
+			color:#ffffff;
+			font-size:20px;
+			font-weight: bold;
+			font-family:'Open Sans', sans-serif;
+			margin-bottom: 20px;
+		}
 
+		#desc 
+		{
+			color: #262D2E;
+			padding: 10px;
+			border-radius: 3px;
+			font-family:'Open Sans', sans-serif;
+			font-size:13px;
+			text-decoration: none;
+		}
+		.thumbnail li
+		{
+			font-size: 15px;
+		}
 	</style>
 
 
@@ -180,24 +202,28 @@
 				<div class="col-md-6">
 
 					<div class="panel panel-default">
-						<div class="panel-title text-center">{{item.name}} <small> Id: {{item.id}}</small></div>
+						<div class="panel-title text-center">{{item.name}}</div>
 						<div class="row">
 							<div class="col-md-6">
 								<img src= '{{item.image.url}}' class="img-responsive center-block" >
 							</div>
 
 							<div class="col-md-6">
-
-								{{item.description}}
-
+								<div class="panel panel-default">
+									<p id="desc">{{item.description}}<p>
+								</div>
 							</div>
 
 
+						</div><hr />
+						<div class="thumbnail">
+							<div class="row">
+							<div class="col-md-4"><li> Price : <span style="color:red; font-weight: bold;">&euro;{{item.price}}</span> </li></div>
+							
+							<div class="col-md-4"><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></div>
+							<div class="col-md-4"><li> ProductId: {{item.productId}}</li></div>
+							</div>
 						</div>
-						<li> Price : {{item.price}} </li>
-						<p> ProductId: {{item.productId}}</p>
-
-						<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 					</div>
 				</div>
 
