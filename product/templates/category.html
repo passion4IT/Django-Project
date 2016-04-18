@@ -1,5 +1,6 @@
 
-{% extends "hello.html" %}
+<!-- extending the base.html page as parent page -->
+{% extends "base.html" %}
 
 {% block title %} Verkokauppa / {{cat_name}} {% endblock %}
 
@@ -7,7 +8,6 @@
 
 {% block style %}
 <style>
-
 p
 {
 	font-size : 1em;
@@ -51,13 +51,17 @@ h1{ margin-bottom:35px !important;
 
 {% endblock %}
 
+<!-- Page order status -->
+
 <p>Olet : Tuote / {{cat_name}}</p>
 
+<!-- Back button for usability enhancement-->
 <p><a href="javascript:history.go(-1)"> Edelliselle sivulle </a></p>
 <hr />
 
 <h1>{{cat_name}}</h1>
 
+<!-- Displaying dynamically generated list of products as per user's request-->
 <div class="row">
 {% for pro in cat_context %}
 	
@@ -94,7 +98,7 @@ h1{ margin-bottom:35px !important;
 			</div>
 
 		</div>
-	
+<!-- completing the cycle of product presentation to maintain uniformity on page -->
 {% cycle "" "</div><div class='row'>" %}
 {% endfor %}
 </div>

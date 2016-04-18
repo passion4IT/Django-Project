@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-
-
+from django.http import HttpResponse
 from django.views.generic import TemplateView, DetailView
 from .models import Category, Product
+from django.core import serializers
 
 
 
@@ -10,6 +10,8 @@ from .models import Category, Product
 def product_display(request):
 	instance = Product.objects.all()
 	queryset = Category.objects.all()
+
+	product_json = serializers.serialize("json", Product.objects.all())
 
 	query1= request.GET.get("search")
 	query2= request.GET.get("searchId")
@@ -25,11 +27,12 @@ def product_display(request):
 
 	instance_context ={
 		"product" : instance,
-		"category": queryset
+		"category": queryset,
+		"pr_json" : product_json
 
 	}
 
-	return render(request, "hello.html", instance_context)
+	return render(request, "base.html", instance_context)
 
 # View defined for category-based product display plage
 def category_display(request, name):
@@ -42,3 +45,4 @@ def category_display(request, name):
 	}
 
 	return render(request, "category.html", h_context)
+

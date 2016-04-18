@@ -1,14 +1,14 @@
 from django.db import models
 
 
-
+# model for category of the product
 class Category(models.Model):
 	name=models.CharField(max_length=30)
 	
 	def __str__(self):
 		return self.name
 
-
+#model for the detail information of the product
 class Product(models.Model):
 	category = models.ForeignKey(Category, null=True)
 	name = models.CharField(max_length =120)
@@ -25,25 +25,3 @@ class Product(models.Model):
 		return self.name
 	
 	
-# class Product(Item):
-# 	warranty = models.CharField(max_length=100)
-	
-
-
-# class Camera(models.Model):
-# 	productIdd = models.ForeignKey(Product, blank = True, null=True)
-	
-# # class Camera(Item):
-# 	warranty = models.CharField(max_length=100)
-# 	Zoomlens = models.CharField(max_length=50)
-# 	wireless = models.BooleanField()
-
-# class Phone(Item):
-# 	os = models.CharField(max_length = 50)
-# 	screensize = models.CharField(max_length = 60)
-# 	battery_life = models.CharField(max_length = 60)
-
-
-
-# def __str__(self):
-# 	return self.name

@@ -2,136 +2,297 @@
 <!doctype html>
 <html>
 	<head>
-	<title{% block title %}>Product Display {% endblock %}</title>
+	<!-- Dynamic title of the page -->
+	<title>{% block title %}Verkokauppa {% endblock %}</title>
 	<meta charset="utf-8">
-	
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-		<!-- link to external css for the styling -->
-		<link rel='stlesheet' href="{% static 'css/base.css' %}"/>
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-		<!-- link to google font BreeSerif -->
-		<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<!-- link to external css for the styling -->
+	<link rel='stlesheet' href="{% static 'css/base.css' %}"/>
+
+	<!-- link to google fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Prociono' rel='stylesheet' type='text/css'>
 
 	</head>
 
+<!-- Dynamic styling with base uniform styling -->
+{% block css %}
+	<style>
+		body{background-color: #E0F8E6;}
+
+		body
+		{
+	
+			font-family: 'Prociono', serif;
+			background-color: #ECF6CE;
+
+			
+		}
+
+		.container {
+			border-top: 2px groove #610B4B;
+			background-color: #ffffff;
+		}
+
+		h1
+		{
+			color:#d04949;
+			text-align: center;
+			text-shadow: 2px 2px #e6e600;
+			font-size: 5em;
+			font-family: "Bree Serif", sans-serif;
+
+		}
+
+		p {
+			color: #ac3939;
+			font-size: 2em;
+			font-weight: bold;
+			text-decoration: underline;
+			
+		}
+
+		form{text-align: center;}
+		a:hover{
+			text-decoration: none;
+		}
+		li, h3
+		{
+			font-size: 1.5em;
+			list-style-type: none;
+			font-family: 'Open Sans', sans-serif;
+			margin: 10px;
+			font-weight: bold;
+
+		}
+			
+		h2
+		{
+			text-align: center;
+			margin-bottom: 10px;
+
+		}
+			
+		}
+		.panel-footer, input, label {
+			padding: 10px;
+			margin: 10px;
+			font-family: 'Prociono', serif;
+			border-radius: 10px;
+		}
+
+		input{
+			text-align: center;
+			margin: 5px;
+			border: 2px solid #088A08;
+			border-radius: 15px !important;
+		}
+
+		.btn
+		{
+			padding: 2px 25px !important;
+			margin: 10px !important;
+			border-radius: 17px !important;
+			font-size: 20px!important;
+		}
+
+		.thumbnail
+		{
+			background-color: #FFFFCC;
+		}
+		#category
+		{
+			
+			color:#ffffff;
+			font-family:'Open Sans', sans-serif;
+			font-size: 18px;
+			padding: 5px -2px 6px 6px !important;
+			border-radius: 2px;
+			margin-right:40px;
+			
+		}
+		#panel-container
+		{
+			height: auto;
+			background-color: #008000;
+			width: 200px;
+			padding:0px;
+
+		}
+		.glyphicon {
+			font-size: 15px;
+		}
+
+		.panel-title{
+			background-color: #008000;
+			padding: 10px;
+			color:#ffffff;
+			font-size:20px;
+			font-weight: bold;
+			font-family:'Open Sans', sans-serif;
+			margin-bottom: 20px;
+		}
+
+		#desc 
+		{
+			color: #262D2E;
+			padding: 10px;
+			border-radius: 3px;
+			font-family:'Open Sans', sans-serif;
+			font-size:13px;
+			text-decoration: none;
+		}
+		.thumbnail li
+		{
+			font-size: 15px;
+		}
+		#category_link
+		{
+			text-shadow: 2px 1px red;
+		}
+		#output
+		{
+			padding: 0px;
+			border: 1px solid #ffffff;
+		}
+	</style>
+
+
+
+{% endblock %}
 
 
 <body>
 
 	<div class="container">
 
-		{% block content %}
-			<h1> Electronics Store </h1> <hr />
+	{% block content %}
 
-			<p> Browse By </p> <hr />
-
-			<ul class="list-group">	
-				<li><a href="#">{{category}}</a></li>
-				<li><a href="#">{{category2}}</a></li>
-
-			</ul>
-
-
+		<h1> <a href="/">VerkoKauppa </a> </h1> <hr />
+	
+			
+				<div class="panel panel-default" id="panel-container">
+				<ul>
+				 <div class="panel-header" id="category" style="text-decoration: underline;"> Tuoteryhmät </div> 
+					
+				<!-- List of products category to browse ease -->
+				 	{% for cat in category %}
+				 	<li id="category_link">		
+				 		<a style= "color:#E3F0F1;" href="product/{{cat.name}}" onmouseover="this.innerHTML='Näytä kaikki'" onmouseout="this.innerHTML='{{cat.name}}'">{{cat.name}}
+				 		</a>
+				 	</li> 
+				 	
+				 	{% endfor %}
+				</ul>
+				</div>
+			
 		<!-- Search form for finding individual product based on productname and productid-->
 
-		<form method="GET" action="" name="searchForm">
+		<form class="form-horizontal" method="GET" action="" >
 
-		<div class="panel panel-default">
-		<div class="panel-body">
-		<div class="panel-footer">
-			<input type="text" name="productname" placeholder="Enter productname">
+		<h3> Tuotehaku: &nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	  	<div class="panel panel-default">
+		  <label for="prName"> Tuotenimella:
+		  <input type="text" name ='search'placeholder="Tuotenimella" value="{{request.GET.search}}" />
+		  
+		  <label for="prid"> Tuotekodilla:
+		  <input type="text" placeholder="Tuotekodilla"value="" name="searchId" value={{request.GET.searchId}} />
 
-			<input type="text" name="productid" placeholder = "Enter productId"><br />
+		  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Hae </button>	  
 
-		<input type="submit" class="btn btn-success btn-small" value="search"></div>
 		</div>
-			</form>
-		</div>
-
 
 		</form>
 
-		<!-- Displaying available camera -->
-			<h2>{{category}}</h2>
+		<!--End of search form -->
+
+		<!-- Complete list of products display -->
+
+		<h2>Tuotteet: <a><span style="color:green; font-size:25px; text-shadow:2px 2px #F3F781"class="glyphicon glyphicon-shopping-cart" aria-hidden="true">Basket <span id="output">0</span></a>
+
+		</h2> 
+
+		
+		<hr />
 
 			<div class="row">
-			{% for camera in item %}
-			<div class="col-md-6">
+			{% for item in product %}
+				<div class="col-md-6">
 
-				<div class="thumbnail">
-					<h3>{{camera.name}} <small> Id: {{camera.id}}</small></h3>
-					<div class="row">
-						<div class="col-md-6">
-							<img src= '{{camera.image.url}}' class="img-responsive" >
+					<div class="panel panel-default">
+						<div class="panel-title text-center">{{item.name}}</div>
+						<div class="row">
+							<div class="col-md-6">
+								<img src= '{{item.image.url}}' class="img-responsive center-block" >
+							</div>
+
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<p id="desc">{{item.description}}<p>
+								</div>
+							</div>
+
+
+						</div><hr />
+						<div class="thumbnail">
+							<div class="row">
+							<div class="col-md-4"><li> Price : <span style="color:red; font-weight: bold;">&euro;{{item.price}}</span> </li></div>
+							
+							<div class="col-md-4"><button id="increaseProduct" class="btn btn-primary btn-lg" href="#" role="button" > Add to cart </button></div>
+							<div class="col-md-4"><li> ProductId: {{item.productId}}</li></div>
+							</div>
 						</div>
-
-						<div class="col-md-6">
-
-							{{camera.description}}
-
-						</div>
-
-
 					</div>
-					<p> Price : {{camera.price}} <a href="/camera/{{camera.id}}">Show more </a></p>
-
-					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
 				</div>
-			</div>
 
-			{% endfor %}
-
-		   </div>
-
-		<!-- Displaying SmartPhones -->
-
-			<h2>{{category2}}</h2>
-
-			<div class="row">
-			{% for phone in item2 %}
-			<div class="col-md-6">
-
-				<div class="thumbnail">
-					<h3>{{phone.name}} <small> Id: {{phone.id}} </small></h3>
-					<div class="row">
-					<div class="col-md-6">
-					<img src= '{{phone.image.url}}' class="img-responsive" >
-					</div>
-
-					<div class="col-md-6">
-
-						{{phone.description}}
-
-					</div>
-
-
-					</div>
-					<p> Price : {{phone.price}}</p>
-
-					<p><a class="btn btn-primary btn-lg" href="#" role="button"> Add to cart </a></p>
-				</div>
-			</div>
+			
 
 			{% cycle "" "</div><div class='row'>" %}
 			{% endfor %}
+		   </div>
 
-			</div>
+		
 
-
-
-
-		{%endblock content %}
+	{% endblock %}
 	</div>
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- javascript function to increase cart count -->
+	<script>
+			
+        	// $.each(product.id,functi$(document).ready(function() {
+		  	// 	$.each(this, function(key,value){
+		  				
+		  			//
+        		// });
+
+        	// var postid = $(this).data('{{product.name}}');
+    
+         //    $(postid).click(function(){
+         //        counter++;    
+         //        $("#output").text(counter);
+
+        $(document).ready(function() {
+		var count = 0;
+
+  		$("#increaseProduct").click(function() {
+    		count++;
+    	$("#output").text(count);
+		  });
+
+		});
+          
+    
+     
+	</script>
+
+	
  <!-- Latest compiled and minified JavaScript -->
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
-
-
-
 </html>
